@@ -5,6 +5,7 @@
 
 namespace Web_API {
 	std::string GetSocketURL();
+	void OnWebJump(std::string_view url);
 	void OnLoadMap(std::string_view name);
 	void SyncPlayerData(std::string_view uuid, int rank, int account_bin, std::string_view badge, int id = -1);
 	void SyncGlobalPlayerData(std::string_view uuid, std::string_view name, std::string_view sys, int rank, int account_bin, std::string_view badge);
