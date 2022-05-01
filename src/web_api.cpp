@@ -14,6 +14,12 @@ std::string Web_API::GetSocketURL() {
 	}));
 }
 
+void Web_API::OnWebJump(std::string_view url) {
+	EM_ASM({
+		onWebJump(UTF8ToString($0));
+	}, url.data(), url.size());
+}
+
 void Web_API::OnLoadMap(std::string_view name) {
 	EM_ASM({
 		onLoadMap(UTF8ToString($0));
