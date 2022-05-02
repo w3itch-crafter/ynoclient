@@ -884,11 +884,7 @@ bool DoCommandShowMessage(std::string cmd) {
 		std::istringstream iss(cmd); std::string _, url; iss >> _ >> url;
 
 		Output::Debug("Web Jump: ", url.c_str());
-
-		EM_ASM({
-			onWebJump(UTF8ToString($0));
-		}, url.c_str());
-
+		Web_API::onWebJump(url);
       	return true;
     }
 	return false;
