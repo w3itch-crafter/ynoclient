@@ -876,6 +876,24 @@ bool Game_Interpreter::CommandOptionGeneric(lcf::rpg::EventCommand const& com, i
 	return true;
 }
 
+bool DoCommandShowMessage(std::string cmd) {
+	std::string msg;
+    msg = ".webJump";
+
+    if (std::equal(msg.begin(), msg.end(), cmd.begin())) {
+		std::istringstream iss(cmd); std::string _, url; iss >> _ >> url;
+
+		Output::Debug("Web Jump: ", url.c_str());
+
+		EM_ASM({
+			onWebJump(UTF8ToString($0));
+		}, url.c_str());
+
+      	return true;
+    }
+	return false;
+}
+
 bool Game_Interpreter::CommandShowMessage(lcf::rpg::EventCommand const& com) { // code 10110
 	auto& frame = GetFrame();
 	const auto& list = frame.commands;
@@ -883,6 +901,10 @@ bool Game_Interpreter::CommandShowMessage(lcf::rpg::EventCommand const& com) { /
 
 	if (!Game_Message::CanShowMessage(main_flag)) {
 		return false;
+	}
+
+	if (DoCommandShowMessage(ToString(com.string))) {
+		return true;
 	}
 
 	auto pm = PendingMessage();
