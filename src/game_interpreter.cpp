@@ -60,6 +60,7 @@
 #include "baseui.h"
 #include "algo.h"
 #include "rand.h"
+#include "web_api.h"
 
 enum BranchSubcommand {
 	eOptionBranchElse = 1
